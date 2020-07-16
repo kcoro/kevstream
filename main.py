@@ -1,91 +1,107 @@
-from flask import Flask, request, url_for, render_template, jsonify, redirect, session
-from werkzeug.utils import secure_filename
-from markupsafe import escape
-# auth0 requirements
-import json
+"""Python Flask WebApp Auth0 integration example
+"""
 from functools import wraps
+import json
 from os import environ as env
 from werkzeug.exceptions import HTTPException
+
 from dotenv import load_dotenv, find_dotenv
+from flask import Flask
+from flask import jsonify
+from flask import redirect
+from flask import render_template
+from flask import session
+from flask import url_for
 from authlib.integrations.flask_client import OAuth
 from six.moves.urllib.parse import urlencode
 
 
-app = Flask(__name__)
+AUTH0_CALLBACK_URL = 'https://localhost:5000/callback'
+AUTH0_CLIENT_ID = 'akcunowK9MKZJD3sbouBNCNT15jx2bY6'
+AUTH0_CLIENT_SECRET = 'N07vaTBfs--ZNk2jwsCMPfNgRZkmKJAVszb2kpzIMc4tlz8JhvdpP3WZBHqYN_k9'
+AUTH0_DOMAIN = 'dev-jilpfaxm.us.auth0.com'
+AUTH0_BASE_URL = 'https://dev-jilpfaxm.us.auth0.com'
+AUTH0_AUDIENCE = 'https://localhost:5000.auth0.com/userinfo'
+JWT_PAYLOAD = ''
+PROFILE_KEY = ''
+
+
+app = Flask(__name__, static_url_path='/public', static_folder='./public')
+app.secret_key = 'ThisIsASecretKey'
+app.debug = True
+
+
+@app.errorhandler(Exception)
+def handle_auth_error(ex):
+    response = jsonify(message=str(ex))
+    response.status_code = (ex.code if isinstance(ex, HTTPException) else 500)
+    return response
+
 
 oauth = OAuth(app)
 
 auth0 = oauth.register(
-	'auth0',
-	client_id='akcunowK9MKZJD3sbouBNCNT15jx2bY6',
-	client_secret='N07vaTBfs--ZNk2jwsCMPfNgRZkmKJAVszb2kpzIMc4tlz8JhvdpP3WZBHqYN_k9',
-	api_base_url='https://dev-jilpfaxm.us.auth0.com',
-	access_token_url='https://dev-jilpfaxm.us.auth0.com/oauth/token',
-	authorize_url='https://dev-jilpfaxm.us.auth0.com/authorize',
-	client_kwargs={
-	'scope': 'openid profile email',
-	},
+    'auth0',
+    client_id=AUTH0_CLIENT_ID,
+    client_secret=AUTH0_CLIENT_SECRET,
+    api_base_url=AUTH0_BASE_URL,
+    access_token_url=AUTH0_BASE_URL + '/oauth/token',
+    authorize_url=AUTH0_BASE_URL + '/authorize',
+    client_kwargs={
+        'scope': 'openid profile email',
+    },
 )
 
 
-# Check if user is authenticated, use it to decorate methods
-# that require authentication
 def requires_auth(f):
-  @wraps(f)
-  def decorated(*args, **kwargs):
-    if 'profile' not in session:
-      # Redirect to Login page here
-      return redirect('/')
-    return f(*args, **kwargs)
-  return decorated
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        if PROFILE_KEY not in session:
+            return redirect('/login')
+        return f(*args, **kwargs)
+
+    return decorated
 
 
-# Index contains link to /login route to begin authentication
+# Controllers API
 @app.route('/')
-def index():
-	return render_template('index.html')
+def home():
+    return render_template('home.html')
 
 
-# auth0 callback route.
 @app.route('/callback')
 def callback_handling():
-    # Handles response from token endpoint
     auth0.authorize_access_token()
     resp = auth0.get('userinfo')
     userinfo = resp.json()
 
-    # Store the user information in flask session.
-    session['jwt_payload'] = userinfo
-    session['profile'] = {
+    session[JWT_PAYLOAD] = userinfo
+    session[PROFILE_KEY] = {
         'user_id': userinfo['sub'],
         'name': userinfo['name'],
         'picture': userinfo['picture']
     }
-    return redirect('/stream')
+    return redirect('/dashboard')
 
 
-#  Login uses AuthLib client to redirect user to login page.
 @app.route('/login')
 def login():
-    return auth0.authorize_redirect(redirect_uri='https://kevstream.herokuapp.com/callback')
+    return auth0.authorize_redirect(redirect_uri=AUTH0_CALLBACK_URL)
 
 
-# Logout users via auth0
 @app.route('/logout')
 def logout():
-    # Clear session stored data
     session.clear()
-    # Redirect user to logout endpoint
-    params = {'returnTo': url_for('home', _external=True), 'client_id': 'akcunowK9MKZJD3sbouBNCNT15jx2bY6'}
+    params = {'returnTo': url_for('home', _external=True), 'client_id': AUTH0_CLIENT_ID}
     return redirect(auth0.api_base_url + '/v2/logout?' + urlencode(params))
 
 
-# Successful authentication will reroute user to main stream.
-@app.route('/stream')
+@app.route('/dashboard')
 @requires_auth
-def stream():
-    return render_template('stream.html',
-                           userinfo=session['profile'],
-                           userinfo_pretty=json.dumps(session['jwt_payload'], indent=4))
+def dashboard():
+    return render_template('dashboard.html',
+                           userinfo=session[PROFILE_KEY],
+                           userinfo_pretty=json.dumps(session[JWT_PAYLOAD], indent=4))
+
 
 
