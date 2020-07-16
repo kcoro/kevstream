@@ -60,7 +60,7 @@ def requires_auth(f):
 
 # Index
 @app.route('/')
-def home():
+def index():
     return render_template('index.html')
 
 
