@@ -7,6 +7,13 @@ from functools import wraps
 import json
 
 
+# Flask app configuration
+app = Flask(__name__, static_url_path='/public', static_folder='./public')
+app.secret_key = 'ThisIsASecretKey'
+app.debug = True
+
+
+# auth0 configuration
 AUTH0_CALLBACK_URL = 'https://kevstream.herokuapp.com/callback'
 AUTH0_CLIENT_ID = 'akcunowK9MKZJD3sbouBNCNT15jx2bY6'
 AUTH0_CLIENT_SECRET = 'N07vaTBfs--ZNk2jwsCMPfNgRZkmKJAVszb2kpzIMc4tlz8JhvdpP3WZBHqYN_k9'
@@ -17,11 +24,6 @@ JWT_PAYLOAD = ''
 PROFILE_KEY = ''
 
 
-app = Flask(__name__, static_url_path='/public', static_folder='./public')
-app.secret_key = 'ThisIsASecretKey'
-app.debug = True
-
-
 @app.errorhandler(Exception)
 def handle_auth_error(ex):
     response = jsonify(message=str(ex))
@@ -30,6 +32,7 @@ def handle_auth_error(ex):
 
 
 oauth = OAuth(app)
+
 
 auth0 = oauth.register(
     'auth0',
@@ -44,6 +47,7 @@ auth0 = oauth.register(
 )
 
 
+# decorator for requiring authorization on routes
 def requires_auth(f):
     @wraps(f)
     def decorated(*args, **kwargs):
@@ -54,12 +58,13 @@ def requires_auth(f):
     return decorated
 
 
-# Controllers API
+# Index
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('index.html')
 
 
+# Route called by auth0 to send access token and acquire users data
 @app.route('/callback')
 def callback_handling():
     auth0.authorize_access_token()
@@ -72,25 +77,30 @@ def callback_handling():
         'name': userinfo['name'],
         'picture': userinfo['picture']
     }
-    return redirect('/dashboard')
+    return redirect('/stream')
 
 
+# route accessed via login button in index.html
+# begins auth0 authentication process
 @app.route('/login')
 def login():
     return auth0.authorize_redirect(redirect_uri=AUTH0_CALLBACK_URL)
 
 
+# Logs user out and reroutes to index page
 @app.route('/logout')
 def logout():
     session.clear()
-    params = {'returnTo': url_for('home', _external=True), 'client_id': AUTH0_CLIENT_ID}
+    params = {'returnTo': url_for('index', _external=True), 'client_id': AUTH0_CLIENT_ID}
     return redirect(auth0.api_base_url + '/v2/logout?' + urlencode(params))
 
 
-@app.route('/dashboard')
+# Stream is only available to authenticated users
+# auth0 /callback reroutes here on successfully authentication
+@app.route('/stream')
 @requires_auth
 def dashboard():
-    return render_template('dashboard.html',
+    return render_template('stream.html',
                            userinfo=session[PROFILE_KEY],
                            userinfo_pretty=json.dumps(session[JWT_PAYLOAD], indent=4))
 
