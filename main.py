@@ -16,12 +16,12 @@ from authlib.integrations.flask_client import OAuth
 from six.moves.urllib.parse import urlencode
 
 
-AUTH0_CALLBACK_URL = 'https://localhost:5000/callback'
+AUTH0_CALLBACK_URL = 'https://kevstream.herokuapp.com/callback'
 AUTH0_CLIENT_ID = 'akcunowK9MKZJD3sbouBNCNT15jx2bY6'
 AUTH0_CLIENT_SECRET = 'N07vaTBfs--ZNk2jwsCMPfNgRZkmKJAVszb2kpzIMc4tlz8JhvdpP3WZBHqYN_k9'
 AUTH0_DOMAIN = 'dev-jilpfaxm.us.auth0.com'
 AUTH0_BASE_URL = 'https://dev-jilpfaxm.us.auth0.com'
-AUTH0_AUDIENCE = 'https://localhost:5000.auth0.com/userinfo'
+AUTH0_AUDIENCE = 'https://kevstream.herokuapp.com.auth0.com/userinfo'
 JWT_PAYLOAD = ''
 PROFILE_KEY = ''
 
