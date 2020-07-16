@@ -1,19 +1,10 @@
-"""Python Flask WebApp Auth0 integration example
-"""
-from functools import wraps
-import json
-from os import environ as env
+from flask import Flask, jsonify, redirect, render_template, session, url_for
 from werkzeug.exceptions import HTTPException
-
-from dotenv import load_dotenv, find_dotenv
-from flask import Flask
-from flask import jsonify
-from flask import redirect
-from flask import render_template
-from flask import session
-from flask import url_for
 from authlib.integrations.flask_client import OAuth
 from six.moves.urllib.parse import urlencode
+from os import environ as env
+from functools import wraps
+import json
 
 
 AUTH0_CALLBACK_URL = 'https://kevstream.herokuapp.com/callback'
@@ -102,6 +93,5 @@ def dashboard():
     return render_template('dashboard.html',
                            userinfo=session[PROFILE_KEY],
                            userinfo_pretty=json.dumps(session[JWT_PAYLOAD], indent=4))
-
 
 
