@@ -1,4 +1,4 @@
-from kevs_stream import app
+from kevstream import app
 
 if __name__ == "__main__":
 	app.run()
