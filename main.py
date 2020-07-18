@@ -33,7 +33,7 @@ def handle_auth_error(ex):
 
 oauth = OAuth(app)
 
-
+# Initialize auth0 object with settings
 auth0 = oauth.register(
     'auth0',
     client_id=AUTH0_CLIENT_ID,
@@ -58,13 +58,14 @@ def requires_auth(f):
     return decorated
 
 
-# Index
+# Index base route
 @app.route('/')
 def index():
     return render_template('index.html')
 
 
-# Route called by auth0 to send access token and acquire users data
+# Route called by auth0, sends access token and acquires users data
+# redirects user to /stream
 @app.route('/callback')
 def callback_handling():
     auth0.authorize_access_token()
