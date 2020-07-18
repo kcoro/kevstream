@@ -76,7 +76,6 @@ def callback_handling():
     session[PROFILE_KEY] = {
         'user_id': userinfo['sub'],
         'name': userinfo['name'],
-        'picture': userinfo['picture']
     }
     return redirect('/stream')
 
