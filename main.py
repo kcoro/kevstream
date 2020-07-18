@@ -8,7 +8,7 @@ import json
 
 
 # Flask app configuration
-app = Flask(__name__, static_url_path='/public', static_folder='./public')
+app = Flask(__name__, static_url_path='/static', static_folder='./static')
 app.secret_key = 'ThisIsASecretKey'
 app.debug = True
 

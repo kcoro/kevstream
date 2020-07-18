@@ -14,7 +14,7 @@
                     <h1 id="logo"><img src="https://ih1.redbubble.net/image.656372252.2589/st,small,507x507-pad,600x600,f8f8f8.u2.jpg" /></h1>
                     <h3>Welcome {{userinfo['name']}}</h3>
                     <video width="480" height="360" controls>
-                        <source src={{ url_for('public', filename="Arnold_Training.mp4") }} type="video/mp4">
+                        <source src={{ url_for('static', filename="Arnold_Training.mp4") }} type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     <a id="qsLogoutBtn" class="btn btn-primary btn-lg btn-logout btn-block" href="/logout">Logout</a>
