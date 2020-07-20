@@ -9,14 +9,6 @@ body {
   margin-left: auto;
   margin-right: auto
 }
-.home {
-  max-width: 640px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: auto;
-  margin-bottom: auto;
-}
 pre {
   text-align: left;
 }
@@ -113,55 +105,6 @@ label {
 .login-page .login-box {
   padding: 100px 0;
   margin: auto;
-  max-width: 640px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto
-}
-#qsLogoutBtn {
-  max-width: 640px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto
-}
-#static-video {
-  display: block;
-  margin-left: auto;
-  margin-right: auto
-}
-#video-stream {
-  display: block;
-  margin-left: auto;
-  margin-right: auto
-}
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto
-}
-div .login-box .auth0-box .before {
-  max-width: 640px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto
-}
-div .login-box .auth0-box .before h3 {
-  display: block;
-  margin-left: auto;
-  margin-right: auto
-}
-div .login-box .auth0-box .before img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto
-}
-div .logged-in-box .auth0-box .logged-in {
-  max-width: 640px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto
-}
-a #qsLogoutBtn .btn .btn-primary .btn-lg .btn-logout .btn-block {
   max-width: 640px;
   display: block;
   margin-left: auto;
