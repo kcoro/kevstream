@@ -108,7 +108,7 @@ def dashboard():
 # Live Stream is only available to authenticated users
 @app.route('/live_stream')
 @requires_auth
-def dashboard():
+def livestream():
     return render_template('live_stream.html',
                            userinfo=session[PROFILE_KEY],
                            userinfo_pretty=json.dumps(session[JWT_PAYLOAD], indent=4))
