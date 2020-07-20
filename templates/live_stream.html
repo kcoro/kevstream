@@ -2,25 +2,21 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- font awesome from BootstrapCDN -->
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-        <link href="/public/app.css" rel="stylesheet">
+        <link href="public/app.css" rel="stylesheet">
     </head>
-    <body class="home">
+    <body>
         <div class="container">
-            <div class="login-page clearfix">
-                <div class="logged-in-box auth0-box logged-in">
-                    <h2>Welcome {{userinfo['name']}}</h2>
-                    <br>
-                    <video id="static-video" width="640" height="480" controls autoplay>
-                        <source src="http://73.124.41.146:8080/stream" type="video/ogg">
-                        Your browser does not support the video tag.
-                    </video>
-                    <br> 
-                    <a id="qsLogoutBtn" class="btn btn-primary btn-lg btn-logout btn-block" href="/stream">Home</a>
-                    <a id="qsLogoutBtn" class="btn btn-primary btn-lg btn-logout btn-block" href="/logout">Logout</a>
-                </div>
-            </div>
+            <h2>Welcome {{userinfo['name']}}</h2>
+            <br>
+            <video id="static-video" width="640" height="480" controls autoplay>
+                <source src="http://73.124.41.146:8080/stream" type="video/ogg">
+                Your browser does not support the video tag.
+            </video>
+            <br> 
+            <br>
+            <a class="button" href="/stream">Home</a>
+            <br>
+            <a class="button" href="/logout">Logout</a>
         </div>
     </body>
 </html>
