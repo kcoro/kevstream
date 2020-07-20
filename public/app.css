@@ -5,7 +5,9 @@ body {
   font-size: 300%;
   font-weight: 100;
   max-width: 640px;
-  margin: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto
 }
 pre {
   text-align: left;
@@ -104,6 +106,24 @@ label {
   padding: 100px 0;
   margin: auto;
 }
-img {
-  margin: auto;
+#qsLogoutBtn {
+  max-width: 640;
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+#static-video {
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+#video-stream {
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+#logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto
 }
