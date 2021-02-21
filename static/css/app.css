@@ -76,3 +76,8 @@ img {
 .button:hover {
     border: 4px solid #fff;
 }
+
+.video-stream {
+    margin-left: auto;
+    margin-right: auto;
+}
