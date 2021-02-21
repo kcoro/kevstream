@@ -12,12 +12,12 @@
 <body class="bg-img">
     <div class="overlay"></div>
     <div class="container">
-        <h2 id="heading-live-stream">Welcome {{userinfo['name']}}</h2>
-        <p class="message-stream">The live stream will appear in the video element below when
-            the hosts webcam is connected and streaming to the website.  Otherwise there will be no streaming content output.
+        <h2>Welcome {{userinfo['name']}}</h2>
+        <p class="message-stream">A live stream will appear in the video element below when
+            the hosts webcam is connected and streaming to the website.  The hosts public ip address must be set in the video element's source.
         </p>
         <video class="video-stream" width="640" height="480" controls autoplay>
-            <source src="http://73.124.41.146:8080/stream" type="video/ogg">
+            <source src="hiding-my-ip-address/stream" type="video/ogg">
             Your browser does not support the video tag.
         </video>
         <br>
