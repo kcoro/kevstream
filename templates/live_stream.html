@@ -1,21 +1,31 @@
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="{{ url_for('static', filename='css/app.css') }}" rel="stylesheet">
-    </head>
-    <body>
-        <div class="container">
-            <h2>Welcome {{userinfo['name']}}</h2>
-            <br>
-            <video id="static-video" width="640" height="480" controls autoplay>
-                <source src="http://73.124.41.146:8080/stream" type="video/ogg">
-                Your browser does not support the video tag.
-            </video>
-            <br> 
-            <br>
-            <a class="button" href="/stream">Home</a>
-            <br>
-            <a class="button" href="/logout">Logout</a>
-        </div>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ url_for('static', filename='css/app.css') }}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <title>KevStream</title>
+</head>
+<body class="bg-img">
+    <div class="overlay"></div>
+    <div class="container">
+        <h2 id="heading-live-stream">Welcome {{userinfo['name']}}</h2>
+        <br>
+        <p class="message">The live stream will appear in the video element below when
+            the hosts webcam is connected and streaming to the website.  Otherwise there will be no streaming content output.
+        </p>
+        <video id="static-video" width="640" height="480" controls autoplay>
+            <source src="http://73.124.41.146:8080/stream" type="video/ogg">
+            Your browser does not support the video tag.
+        </video>
+        <br> 
+        <br>
+        <a class="button" href="/stream">Home</a>
+        <br>
+        <a class="button" href="/logout">Logout</a>
+    </div>
+</body>
 </html>

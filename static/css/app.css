@@ -1,35 +1,74 @@
-body {
-    max-width: 640px;
+.bg-img {
+    height: 100%;
+    margin: 0;
+    background: url(../img/background.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.overlay {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(44, 44, 44, 0.84);
+}
+
+.container {
+    font-family: 'Roboto', sans-serif;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 5%;
 }
 
-.index-logo {
-    max-width: 640px;
+#index-logo {
+    max-width: 800px;
+    display: block;
+    padding-left: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.message {
+    font-size: 2rem;
+    color: rgb(225, 225, 225);
+    max-width: 600px;
+    text-align: center;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
 h2 {
-    font-size: 24px;
-    color: #272727;
+    font-size: 2rem;
+    color: #fff;
     text-align: center;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
+img {
+    background-color: rgba(255, 255, 255, 0.0);
+}
+
 .button {
     background-color: #d82020;
     border: none;
-    color: white;
-    padding: 15px 32px;
+    color: #fff;
+    max-width: 360px;
+    padding: 15px 24px;
     text-align: center;
     text-decoration: none;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    font-size: 20px;
+    font-size: 2rem;
+}
+
+.button:hover {
+    border: 4px solid #fff;
 }

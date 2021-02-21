@@ -1,10 +1,23 @@
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="{{ url_for('static', filename='css/app.css') }}" rel="stylesheet">
-    </head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ url_for('static', filename='css/app.css') }}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <title>KevStream</title>
+</head>
+<body class="bg-img">
+    <div class="overlay"></div>
     <div class="container">
         <h2>Welcome {{userinfo['name']}}</h2>
+        <br>
+        <p class="message">This page simply demonstrates using oauth2 with auth0
+            to protect routes with authentication and validation for access. Below is a 
+            cached video for playback.
+        </p>
         <br>
         <video id="video-stream" width="640" height="480" controls>
             <source src={{ url_for('static', filename="Arnold_Training.mp4") }} type="video/mp4">
@@ -16,5 +29,5 @@
         <br>
         <a class="button" href="/logout">Logout</a>
     </div>
-    </body>
+</body>
 </html>

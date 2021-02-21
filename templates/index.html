@@ -1,15 +1,22 @@
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="{{ url_for('static', filename='css/app.css') }}" rel="stylesheet">
-    </head>
-    <body>
-      <div class="container">
-          <img class="index-logo" src="https://ih1.redbubble.net/image.656372252.2589/st,small,507x507-pad,600x600,f8f8f8.u2.jpg" />
-          <br>
-          <h2>What are you waiting for, join now!</h2>
-          <br>
-          <a class="button" href="/login">Log In</a>
-      </div>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ url_for('static', filename='css/app.css') }}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <title>KevStream</title>
+</head>
+<body class="bg-img">
+    <div class="overlay"></div>
+    <div class="container">
+        <img id="index-logo" src="../static/img/logo.png" />
+        <p class="message">A simple flask app demonstrating use of Auth0 to view protected routes.</p>
+        <p class="message">You can login with your Google account.</p>
+        <br>
+        <a class="button" href="/login">Log In</a>
+    </div>
+</body>
 </html>

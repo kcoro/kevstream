@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, redirect, render_template, session, url_for
-from werkzeug.exceptions import HTTPException
 from authlib.integrations.flask_client import OAuth
+from werkzeug.exceptions import HTTPException
 from six.moves.urllib.parse import urlencode
 from os import environ as env
 from functools import wraps
