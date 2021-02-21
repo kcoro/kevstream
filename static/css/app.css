@@ -6,6 +6,7 @@
     height: 100%;
     width: 100%;
     margin: 0;
+    background-size: cover;
 }
 
 .overlay {
@@ -19,6 +20,7 @@
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-position: top center;
+    background-size: cover;
 }
 
 .container {
