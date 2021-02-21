@@ -13,17 +13,14 @@
     <div class="overlay"></div>
     <div class="container">
         <h2>Welcome {{userinfo['name']}}</h2>
-        <br>
         <p class="message">This page simply demonstrates using oauth2 with auth0
             to protect routes with authentication and validation for access. Below is a 
             cached video for playback.
         </p>
-        <br>
         <video id="video-stream" width="640" height="480" controls>
             <source src={{ url_for('static', filename="Arnold_Training.mp4") }} type="video/mp4">
             Your browser does not support the video tag.
         </video>
-        <br>
         <br>
         <a class="button" href="/live_stream">Live Stream</a>
         <br>
